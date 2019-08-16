@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Aug  2 12:07:28 2019
-
-@author: 40004
-"""
-
 # Project: Create Service Folder
 # Create Date: 08/02/2019
-# Last Updated: 08/13/2019
+# Last Updated: 08/16/2019
 # Create by: Robert Domiano
 # Purpose: This script creates a folder for new service installs
 # ArcGIS Version:   10.2
@@ -23,6 +16,7 @@ import arcpy
 wo = raw_input("WO Number: ")
 street = raw_input("Street: ")
 address = raw_input("Address: ")
+
 
 # Set path for new service folder
 path = r'\\gisappser2\Engineering_GIS\Domiano_Robert\Services'
@@ -55,7 +49,24 @@ try:
     mxd = arcpy.mapping.MapDocument(r"\\gisappser2\Engineering_GIS\Domiano_Robert\ServiceInstall\svcTemplate.mxd")
     newmxd = os.path.join(svcDir, fldrName + ".mxd")
     mxd.saveACopy(newmxd)
-    print("Map Document saved to " + svcDir)
+    print("Map Document saved to {0} as {1}".format(svcDir, newmxd))
 except:
     print("Error")
+    
+# Locate all text elements
+#print(newmxdPath)
+newmxd2 = arcpy.mapping.MapDocument(newmxd)
+totalAddress = address + " " + street
+for elm in arcpy.mapping.ListLayoutElements(newmxd2, "TEXT_ELEMENT"):
+    print(elm.name)
+    if elm.name == "Address":
+        elm.text = totalAddress
+        print("Address has been changed to {0}.".format(totalAddress))
+    if elm.name == "WO":
+        elm.text = str(wo)
+        print("Work order has been changed to {0}.".format(wo))
+        
+arcpy.RefreshActiveView()
+newmxd2.save()
+
     
