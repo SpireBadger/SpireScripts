@@ -58,7 +58,6 @@ except:
 newmxd2 = arcpy.mapping.MapDocument(newmxd)
 totalAddress = address + " " + street
 for elm in arcpy.mapping.ListLayoutElements(newmxd2, "TEXT_ELEMENT"):
-    print(elm.name)
     if elm.name == "Address":
         elm.text = totalAddress
         print("Address has been changed to {0}.".format(totalAddress))
@@ -68,5 +67,6 @@ for elm in arcpy.mapping.ListLayoutElements(newmxd2, "TEXT_ELEMENT"):
         
 arcpy.RefreshActiveView()
 newmxd2.save()
+del elm, newmxd2  
 
     
