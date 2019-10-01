@@ -10,13 +10,13 @@
 
 import glob
 import os
-from PyPDF2 import PdfFileMerger, PdfFileReader
+from PyPDF2 import PdfFileMerger
 import fnmatch
 
 # Define path for input PDFs
 
 inputPath = raw_input("Copy folder path to PDFs: ")
-print(inputPath)
+# print(inputPath)
 os.chdir(inputPath)
 pdfList = []
 for file in glob.glob("*.pdf"):
@@ -37,4 +37,24 @@ recentList.append(recentCover)
 recentList.append(recentPressure)
 recentList.append(recentDesign)
 
-merger = PdfFileMerger()
+# Create a Pdf merge object using the class from PyPDF2
+def PDFmerge(pdfs, output):
+    # Create the object
+    pdfMerger = PdfFileMerger()
+    # For every pdf in the input list, append the pdf to the end of virtual pdf
+    for pdf in pdfs:
+        with open(pdf, 'rb') as f:
+            pdfMerger.append(f)
+    # Write pdf to an output PDF
+    with open(output, 'wb') as f:
+        pdfMerger.write(f)
+
+# Define main pdfs
+def main ():
+    pdfs = recentList
+    output = 'Final.pdf'
+    PDFmerge(pdfs = pdfs, output = output)
+    
+if __name__ == "__main__":
+    main()
+

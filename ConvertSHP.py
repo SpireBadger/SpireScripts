@@ -30,3 +30,5 @@ shpList = arcpy.ListFeatureClasses()
 for shp in shpList:
     print shp
     arcpy.FeatureClassToGeodatabase_conversion(shp, outputWS)
+    
+del shp
