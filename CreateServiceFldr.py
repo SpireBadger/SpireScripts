@@ -21,7 +21,7 @@ while True:
         print("Using the Residential Template.")
         break
     if tpe == "c":
-        mxd = arcpy.mapping.MapDocument(r"\\gisappser2\Engineering_GIS\Domiano_Robert\ServiceInstall\svcTemplate_Commercial_2.mxd")
+        mxd = arcpy.mapping.MapDocument(r"\\gisappser2\Engineering_GIS\Domiano_Robert\ServiceInstall\svcTemplate_Commercial.mxd")
         print("Using the Commercial Template.")
         break
     else:

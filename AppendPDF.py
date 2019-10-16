@@ -25,7 +25,7 @@ del file
 # Loop through pdfList and store all cover, design, and pressure pdfs
 
 coverList = fnmatch.filter(pdfList, "*cover*")
-pressureList = fnmatch.filter(pdfList, "*pressure*")
+pressureList = fnmatch.filter(pdfList, "*pressur*")
 designList = fnmatch.filter(pdfList, "*design*")
 
 # Get the last modified date for each file in the list
@@ -34,8 +34,8 @@ recentPressure = max(pressureList, key=os.path.getctime)
 recentDesign = max(designList, key=os.path.getctime)
 recentList = []
 recentList.append(recentCover)
-recentList.append(recentPressure)
 recentList.append(recentDesign)
+recentList.append(recentPressure)
 
 # Create a Pdf merge object using the class from PyPDF2
 def PDFmerge(pdfs, output):
